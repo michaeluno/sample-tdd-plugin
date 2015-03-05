@@ -25,7 +25,7 @@ class SampleTDDPlugin extends SampleTDDPlugin_Base {
         return $mValue;
     }
     public function render() {
-        echo "<p>" . get( 'A' ) . get( 'B' ) . "</p>";
+        echo "<p>" . $this->get( 'A' ) . $this->get( 'B' ) . "</p>";
     }
     
 }
