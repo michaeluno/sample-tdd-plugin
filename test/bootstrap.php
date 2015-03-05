@@ -1,7 +1,7 @@
 <?php
 $_sTestsDirPath = getenv( 'WP_TESTS_DIR' );
 if ( ! $_sTestsDirPath ) {
-    $_sTestsDirPath = '/tmp/wordpress-tests-lib';
+    $_sTestsDirPath = getenv( 'TEMP' ) . '/wordpress-tests-lib';
 }        
 
 require_once $_sTestsDirPath . '/includes/functions.php';
