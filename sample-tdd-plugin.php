@@ -12,8 +12,8 @@ function getSampleTDDValue( $mValue ) {
  * The base class of the main sample class.
  */
 class SampleTDDPlugin_Base {
-    const NAME = 'Sample TDD Plugin';
-    const VERSION = '0.0.1';
+    const NAME      = 'Sample TDD Plugin';
+    const VERSION   = '0.0.1';
 }
 
 /**
