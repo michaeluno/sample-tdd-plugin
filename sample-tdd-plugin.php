@@ -29,3 +29,11 @@ class SampleTDDPlugin extends SampleTDDPlugin_Base {
     }
     
 }
+
+include( dirname( __FILE__ ) . '/library/admin-page-framework/admin-page-framework.php' );
+include( dirname( __FILE__ ) . '/include/class/SampleTDDPlugin_AdminPage.php' );
+
+function _loadSampleTDDPlugin() {
+    new SampleTDDPlugin_AdminPage;
+}
+add_action( 'plugins_loaded', '_loadSampleTDDPlugin' );
