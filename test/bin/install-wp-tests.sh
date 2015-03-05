@@ -64,7 +64,12 @@ install_test_suite() {
     cd $WP_TESTS_DIR
     svn co --quiet https://develop.svn.wordpress.org/trunk/tests/phpunit/includes/
 
-    download https://develop.svn.wordpress.org/trunk/wp-tests-config-sample.php wp-tests-config.php
+    
+    # If file exists return
+    if [ -f "$WP_TESTS_DIR/wp-tests-config.php" ]; then
+        rm -f "$WP_TESTS_DIR/wp-tests-config.php"        
+    fi    
+    download https://develop.svn.wordpress.org/trunk/wp-tests-config-sample.php $WP_TESTS_DIR/wp-tests-config.php
     sed $ioption "s:dirname( __FILE__ ) . '/src/':getenv( 'TEMP' ) . '/wordpress/':" wp-tests-config.php
     sed $ioption "s/youremptytestdbnamehere/$DB_NAME/" wp-tests-config.php
     sed $ioption "s/yourusernamehere/$DB_USER/" wp-tests-config.php
