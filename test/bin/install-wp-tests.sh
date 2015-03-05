@@ -11,6 +11,7 @@ DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 
 WP_TESTS_DIR=${WP_TESTS_DIR-$TEMP/wordpress-tests-lib}
+TEMP=$([ -z "${TEMP}" ] && echo "/tmp" || echo "$TEMP")
 WP_CORE_DIR=$TEMP/wordpress/
 
 if [ -z "${DB_NAME}" ] || [ -z "${DB_USER}" ] ; then
