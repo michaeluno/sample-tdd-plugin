@@ -21,6 +21,13 @@ fi
 set -ex
 
 download() {
+    
+    # If file exists return
+    if [ -f "$2" ]; then
+        echo "Download: Using the cached file."
+        return
+    fi
+
     if [ `which curl` ]; then
         curl -s "$1" > "$2";
     elif [ `which wget` ]; then
