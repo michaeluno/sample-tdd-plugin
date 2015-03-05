@@ -4,19 +4,19 @@ if [ -f install-wp-tests.cfg ]; then
     source install-wp-tests.cfg
 fi
 
-if [ $# -lt 3 ]; then
-    echo "usage: $0 <db-name> <db-user> <db-pass> [db-host] [wp-version]"
-    exit 1
-fi
-
-DB_NAME=$1
-DB_USER=$2
-DB_PASS=$3
+DB_NAME=${1-$DB_NAME}
+DB_USER=${2-$DB_USER}
+DB_PASS=${3-$DB_PASS}
 DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 
 WP_TESTS_DIR=${WP_TESTS_DIR-$TEMP/wordpress-tests-lib}
 WP_CORE_DIR=$TEMP/wordpress/
+
+if [ -z "${DB_NAME}" ] || [ -z "${DB_USER}" ] ; then
+    echo "usage: $0 <db-name> <db-user> <db-pass> [db-host] [wp-version]"
+    exit 1
+fi
 
 set -ex
 
@@ -64,25 +64,28 @@ install_test_suite() {
     sed $ioption "s|localhost|${DB_HOST}|" wp-tests-config.php
 }
 
+
 install_db() {
-    # parse DB_HOST for port or socket references
-    local PARTS=(${DB_HOST//\:/ })
-    local DB_HOSTNAME=${PARTS[0]};
-    local DB_SOCK_OR_PORT=${PARTS[1]};
-    local EXTRA=""
+	# parse DB_HOST for port or socket references
+	local PARTS=(${DB_HOST//\:/ })
+	local DB_HOSTNAME=${PARTS[0]};
+	local DB_SOCK_OR_PORT=${PARTS[1]};
+	local EXTRA=""
+    
+	if ! [ -z $DB_HOSTNAME ] ; then
+		# if [[ "$DB_SOCK_OR_PORT" =~ ^[0-9]+$ ]] ; then # =~ is not available on some systems
+        if echo $DB_SOCK_OR_PORT | grep -E '^[0-9]+$' > /dev/null ; then
+			EXTRA=" --host=$DB_HOSTNAME --port=$DB_SOCK_OR_PORT --protocol=tcp"
+		elif ! [ -z $DB_SOCK_OR_PORT ] ; then
+			EXTRA=" --socket=$DB_SOCK_OR_PORT"
+		elif ! [ -z $DB_HOSTNAME ] ; then
+			EXTRA=" --host=$DB_HOSTNAME --protocol=tcp"
+		fi
+	fi
 
-    if ! [ -z $DB_HOSTNAME ] ; then
-        if [[ "$DB_SOCK_OR_PORT" =~ ^[0-9]+$ ]] ; then
-            EXTRA=" --host=$DB_HOSTNAME --port=$DB_SOCK_OR_PORT --protocol=tcp"
-        elif ! [ -z $DB_SOCK_OR_PORT ] ; then
-            EXTRA=" --socket=$DB_SOCK_OR_PORT"
-        elif ! [ -z $DB_HOSTNAME ] ; then
-            EXTRA=" --host=$DB_HOSTNAME --protocol=tcp"
-        fi
-    fi
-
-    # create database
-    mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
+	# create database
+	mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
+    
 }
 
 install_wp
