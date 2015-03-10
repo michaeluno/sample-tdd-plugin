@@ -98,10 +98,13 @@ installWordPress() {
     cd "$WP_TEST_DIR"    
     
     rm -f wp-config.php
-    if [[ -z "$DB_PASS" ]]; then
-        DB_PASS="\"\""
+    dbpass=
+    if [[ ! -z "$DB_PASS" ]]; then
+        # DB_PASS="\"\""
+        dbpass="\"${DB_PASS}\""
     fi    
-    php "$WP_CLI" core config --dbname=$DB_NAME --dbuser="$DB_USER" --dbpass="$DB_PASS" --extra-php <<PHP
+    # php "$WP_CLI" core config --dbname=$DB_NAME --dbuser="$DB_USER" --dbpass="$DB_PASS" --extra-php <<PHP
+    php "$WP_CLI" core config --dbname=$DB_NAME --dbuser="$DB_USER" "$dbpass" --extra-php <<PHP
 define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_LOG', true );
 PHP
@@ -117,7 +120,8 @@ PHP
     
 }
     setup_database_table(){
-
+        
+        # If the database table already exists, drop it.
         if [[ -z "$DB_PASS" ]]; then
             DB_PASS="\"\""
         fi
