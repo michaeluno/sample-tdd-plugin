@@ -60,10 +60,11 @@ done
 WORKING_DIR=$(pwd)
 if [[ -z "$PROJECT_DIR" ]]; then
     PROJECT_DIR=$(cd "$WORKING_DIR/.."; pwd)
-    # convert it to an absolute path
-    PROJECT_DIR "$(cd "$(dirname "$PROJECT_DIR")"; pwd)/$(basename "$PROJECT_DIR")" 
-    cd "$WORKING_DIR"
 fi
+# convert it to an absolute path
+PROJECT_DIR "$(cd "$(dirname "$PROJECT_DIR")"; pwd)/$(basename "$PROJECT_DIR")" 
+cd "$WORKING_DIR"
+
 TEMP=$([ -z "${TEMP}" ] && echo "/tmp" || echo "$TEMP")
 WP_CLI="$TEMP/wp-cli.phar"
 CODECEPT="$TEMP/codecept.phar"
