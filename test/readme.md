@@ -29,7 +29,3 @@ In order to run the tests, configure the setting file (`settings.cfg`) and run t
     ```
     bash uninstall.sh
     ```
-    
-## Known Issues
-
-- It may throw an error if the database password is empty.
