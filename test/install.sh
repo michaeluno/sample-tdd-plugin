@@ -99,7 +99,7 @@ installWordPress() {
     
     rm -f wp-config.php
     dbpass=
-    if [[ ! -z "$DB_PASS" ]]; then
+    if [[ $DB_PASS ]]
         # DB_PASS="\"\""
         dbpass="\"${DB_PASS}\""
     fi    
