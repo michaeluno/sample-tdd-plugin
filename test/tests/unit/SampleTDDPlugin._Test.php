@@ -1,8 +1,13 @@
 <?php
 /**
+ * Manually include the bootstrap script as Codeception bootstrap runs after loading this file.
+ * @see https://github.com/Codeception/Codeception/issues/862
+ */
+include_once( dirname( __FILE__ ) . '/_bootstrap.php' );
+/**
  * @group sample_test_plugin
  */
-class Test_SampleTDDPlugin extends WP_UnitTestCase {
+class SampleTDDPlugin_Test extends WP_UnitTestCase {
     
     public function setUp() {
         parent::setUp();
@@ -12,13 +17,13 @@ class Test_SampleTDDPlugin extends WP_UnitTestCase {
         parent::tearDown();
     }
 
-    public function test_constants() {
+    public function testConstants() {
 
         $this->assertEquals( 'Sample TDD Plugin', SampleTDDPlugin::NAME );
         
     }
     
-    public function test_method_return_values() {
+    public function testMethodReturnValue() {
         
         $_oSampleTDDPlugin = new SampleTDDPlugin;
         $this->assertEquals( 
@@ -28,7 +33,7 @@ class Test_SampleTDDPlugin extends WP_UnitTestCase {
         
     }
     
-    public function test_method_output() {
+    public function testMethodOutput() {
 
         $_oSampleTDDPlugin = new SampleTDDPlugin;
         $this->expectOutputString( '<p>AB</p>' );

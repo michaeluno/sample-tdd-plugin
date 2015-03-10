@@ -1,8 +1,13 @@
 <?php
 /**
+ * Manually include the bootstrap script as Codeception bootstrap runs after loading this file.
+ * @see https://github.com/Codeception/Codeception/issues/862
+ */
+include_once( dirname( __FILE__ ) . '/_bootstrap.php' );
+/**
  * @group sample_test_plugin
  */
-class Test_SampleTDDPlugin_AdminPage extends WP_UnitTestCase {
+class SampleTDDPlugin_AdminPage_Test extends WP_UnitTestCase {
     
     public function setUp() {
         parent::setUp();
@@ -12,7 +17,7 @@ class Test_SampleTDDPlugin_AdminPage extends WP_UnitTestCase {
         parent::tearDown();
     }
 
-    public function test_methods_exist() {
+    public function testMethodsExist() {
         
         $_oAdminPage = new SampleTDDPlugin_AdminPage;
         $this->assertTrue( method_exists( $_oAdminPage, 'setUp' ) );
@@ -20,7 +25,7 @@ class Test_SampleTDDPlugin_AdminPage extends WP_UnitTestCase {
         
     }
     
-    public function test_method_return_values() {
+    public function testMethodReturnValues() {
         
         ob_start();
         $_oAdminPage = new SampleTDDPlugin_AdminPage;
