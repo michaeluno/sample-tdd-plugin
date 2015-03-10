@@ -216,7 +216,7 @@ uninstallPlugins() {
 # When the test WodPress site needs to be placed under the project directory such as on Travis CI,
 # simply copying the entire project files into the sub-directory of iteself is not possible.
 # so evacuate the project files to a temporary location first and then after installing WordPress, copy them back to the WordPress plugin directory.
-evaculateProjectFiles() {
+evacuateProjectFiles() {
     
     # Make sure no old file exists.
     if [ -d "$TEMP_PROJECT_DIR" ]; then
@@ -254,7 +254,8 @@ installPlugin() {
     # drop hidden files from being copied
     # cp -r "$PROJECT_DIR/"* "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
  
-    cp -r "$TEMP_PROJECT_DIR" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
+    # cp -r "$TEMP_PROJECT_DIR" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
+    cp -r "$TEMP_PROJECT_DIR" "$WP_TEST_DIR/wp-content/plugins"
  
     # wp cli command
     cd $WP_TEST_DIR
@@ -363,7 +364,7 @@ EOM
 # Download necessary applications
 downloadWPCLI
 downloadCodeception
-evaculateProjectFiles
+evacuateProjectFiles
 
 # Install components
 installWordPress
