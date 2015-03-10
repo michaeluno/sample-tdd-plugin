@@ -130,10 +130,16 @@ PHP
     setup_database_table(){
         
         # If the database table already exists, drop it.
-        if [[ -z "$DB_PASS" ]]; then
-            DB_PASS="\"\""
-        fi
-        RESULT=`mysql -u$DB_USER -p$DB_PASS --skip-column-names -e "SHOW DATABASES LIKE '$DB_NAME'"`
+        # if [[ -z "$DB_PASS" ]]; then
+            # DB_PASS="\"\""
+        # fi
+        dbpass=
+        if [[ $DB_PASS ]]; then
+            echo 'db pass is not empty'
+            dbpass="-p${DB_PASS}"
+        fi           
+        # RESULT=`mysql -u$DB_USER -p$DB_PASS --skip-column-names -e "SHOW DATABASES LIKE '$DB_NAME'"`
+        RESULT=`mysql -u$DB_USER $dbpass --skip-column-names -e "SHOW DATABASES LIKE '$DB_NAME'"`
         if [ "$RESULT" == "$DB_NAME" ]; then
             php "$WP_CLI" db drop --yes
         fi
