@@ -24,7 +24,7 @@ before_script:
   - sleep 3
   
 script:
-- bash test/install.sh -c test/settings.travis.cfg
+- bash test/run.sh -c test/settings.travis.cfg
 # - if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
   # ]]; then bash test/run.sh -c test/settings.travis.cfg -l './_output'; else bash test/run.sh -c test/settings.travis.cfg; fi
 
