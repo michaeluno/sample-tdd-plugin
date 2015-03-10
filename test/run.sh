@@ -64,11 +64,17 @@ cd "$WP_TEST_DIR"
 WP_TEST_DIR=$(pwd)   
 CODECEPT_TEST_DIR="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test"
 
-echo "$PROJECT_SLUG"
-echo "$CODECEPT_TEST_DIR"
+echo "Project Slug: $PROJECT_SLUG"
+echo "Codeception Test Dir: $CODECEPT_TEST_DIR"
 
 # Make sure Codeception is installed
 download http://codeception.com/codecept.phar "$CODECEPT"
+
+# Check if the codecemption configuration file exists.
+if [ ! -f "$CODECEPT_TEST_DIR/codeception.yml" ]; then
+    echo The codeception setting file could not be located.
+    exit 1
+fi
 
 # Run tests
 # @usage    php codecept run -c /path/to/my/project
