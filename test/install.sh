@@ -72,6 +72,9 @@ C3="$TEMP/c3.php"
 set -ex
 
 # convert any relative path or Windows path to linux/unix path to be usable for some path related commands such as basename
+if [ ! -d "$WP_TEST_DIR" ]; then
+  mkdir -p "$WP_TEST_DIR"
+fi
 cd "$WP_TEST_DIR"
 WP_TEST_DIR=$(pwd)   
 cd "$WORKING_DIR"
