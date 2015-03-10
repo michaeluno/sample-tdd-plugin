@@ -69,7 +69,7 @@ C3="$TEMP/c3.php"
 
 # convert any relative path or Windows path to linux/unix path to be usable for some path related commands such as basename
 cd "$WP_TEST_DIR"
-local WP_TEST_DIR=$(pwd)   
+WP_TEST_DIR=$(pwd)   
 cd "$WORKING_DIR"
 
 # Exit on errors, xtrace
