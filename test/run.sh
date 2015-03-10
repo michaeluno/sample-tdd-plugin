@@ -85,4 +85,3 @@ php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR"
 php "$CODECEPT" run unit --colors --coverage-xml --config="$CODECEPT_TEST_DIR"
 
 echo "Tests has completed!"
-$SHELL

@@ -377,4 +377,3 @@ installPlugin
 installCodeception
 
 echo Installation has been complete!
-$SHELL

@@ -43,5 +43,3 @@ uninstall_database_table(){
 uninstall_database_table
 uninstall_wordpress
 echo Uninstallation has been complete!
-
-$SHELL
