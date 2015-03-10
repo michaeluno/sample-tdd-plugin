@@ -23,7 +23,7 @@ do
             exit 1
             ;;                 
         l)  
-            echo "Setting the lod output directory path."
+            echo "Setting the log output directory path."
             COVERAGE_LOG_DIR_PATH=$OPTARG
             ;;            
         c)
@@ -67,14 +67,14 @@ WP_CLI="$TEMP/wp-cli.phar"
 CODECEPT="$TEMP/codecept.phar"
 C3="$TEMP/c3.php"
 
+# Exit on errors, xtrace
+# set -ex
+set -x
+
 # convert any relative path or Windows path to linux/unix path to be usable for some path related commands such as basename
 cd "$WP_TEST_DIR"
 WP_TEST_DIR=$(pwd)   
 cd "$WORKING_DIR"
-
-# Exit on errors, xtrace
-# set -ex
-set -x
 
 downloadWPCLI() {
 
@@ -89,7 +89,10 @@ downloadWPCLI() {
 installWordPress() {
 
     # Remove the destination folder if exists to perform a clean install
-    rm -rf "$WP_TEST_DIR"
+    # If the project directory path is the test site directory, which is the case of on Travis CI, do not delete it.
+    if [ ! "$PROJECT_DIR" == "$WP_TEST_DIR" ]; then  
+        rm -rf "$WP_TEST_DIR"
+    fi
 
     # We use wp-cli command
     php "$WP_CLI" core download --force --path="$WP_TEST_DIR"
