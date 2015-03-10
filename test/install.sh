@@ -62,7 +62,7 @@ if [[ -z "$PROJECT_DIR" ]]; then
     PROJECT_DIR=$(cd "$WORKING_DIR/.."; pwd)
 fi
 # convert it to an absolute path
-PROJECT_DIR "$(cd "$(dirname "$PROJECT_DIR")"; pwd)/$(basename "$PROJECT_DIR")" 
+PROJECT_DIR="$(cd "$(dirname "$PROJECT_DIR")"; pwd)/$(basename "$PROJECT_DIR")"
 cd "$WORKING_DIR"
 
 TEMP=$([ -z "${TEMP}" ] && echo "/tmp" || echo "$TEMP")
