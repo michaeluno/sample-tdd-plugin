@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+SCRIPT_NAME="WordPress Plugin The Test Suite Script Executor"
+SCRIPT_VERSION="1.0.0"
+
 # Include scripts defining functions
 source $(dirname $0)/include/download.sh
 source $(dirname $0)/include/info.sh

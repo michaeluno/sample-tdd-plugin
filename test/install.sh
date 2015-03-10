@@ -10,7 +10,8 @@ source $(dirname $0)/include/info.sh
 
 # Parse arguments
 CONFIGURATION_FILE_PATH="settings.cfg"
-while getopts “ht:c:v” OPTION
+
+while getopts “ht:c:l:v:” OPTION
 do
     case $OPTION in
         h)
@@ -20,18 +21,18 @@ do
         v)
             printVersion
             exit 1
+            ;;                 
+        l)  
+            echo "Setting the lod output directory path."
+            COVERAGE_LOG_DIR_PATH=$OPTARG
             ;;            
         c)
             CONFIGURATION_FILE_PATH=$OPTARG
-            ;;
-        l)  
-            COVERAGE_LOG_DIR_PATH=$OPTARG
             ;;
         ?)
             printUsage
             exit 1
             ;;
-
     esac
 done
 

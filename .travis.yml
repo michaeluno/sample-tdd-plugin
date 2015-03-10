@@ -15,7 +15,7 @@ env:
 install:
 # - test/install.sh -c test/settings.travis.cfg 
 - if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
-  ]]; then bash test/install.sh -c test/settings.travis.cfg -l './_output'; else bash test/run.sh -c test/settings.travis.cfg; fi
+  ]]; then bash test/install.sh -c test/settings.travis.cfg -l '_output'; else bash test/run.sh -c test/settings.travis.cfg; fi
   
 before_script:
   # starting PHP server (PHP 5.4)
