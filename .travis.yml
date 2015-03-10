@@ -3,11 +3,12 @@ language: php
 sudo: false
 
 php:
-- 5.3
-- 5.4
+# Temporarily disabling testing different PHP versions for testing Travis CI.
+# - 5.3
+# - 5.4
 - 5.5
-- 5.6
-- hhvm
+# - 5.6
+# - hhvm
 
 env:
 - WP_VERSION=latest WP_MULTISITE=0 TEMP=/tmp

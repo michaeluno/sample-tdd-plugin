@@ -69,12 +69,15 @@ C3="$TEMP/c3.php"
 
 # Exit on errors, xtrace
 # set -ex
-set -x
+set -ex
 
 # convert any relative path or Windows path to linux/unix path to be usable for some path related commands such as basename
 cd "$WP_TEST_DIR"
 WP_TEST_DIR=$(pwd)   
 cd "$WORKING_DIR"
+
+# On Travis, the working directory looks like:
+# /home/travis/build/michaeluno/sample-tdd-plugin
 
 downloadWPCLI() {
 
