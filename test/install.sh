@@ -66,10 +66,7 @@ TEMP=$([ -z "${TEMP}" ] && echo "/tmp" || echo "$TEMP")
 WP_CLI="$TEMP/wp-cli.phar"
 CODECEPT="$TEMP/codecept.phar"
 C3="$TEMP/c3.php"
-
-# Exit on errors, xtrace
-# set -ex
-set -ex
+TEMP_PROJECT_DIR="$TEMP/$PROJECT_SLUG"
 
 # convert any relative path or Windows path to linux/unix path to be usable for some path related commands such as basename
 if [ ! -d "$WP_TEST_DIR" ]; then
@@ -78,6 +75,14 @@ fi
 cd "$WP_TEST_DIR"
 WP_TEST_DIR=$(pwd)   
 cd "$WORKING_DIR"
+
+echo "Project Dir: $PROJECT_DIR"
+echo "Working Dir: $WORKING_DIR"
+echo "WP TEst Dir: $WP_TEST_DIR"
+
+# Exit on errors, xtrace
+# set -x
+set -ex
 
 # On Travis, the working directory looks like:
 # /home/travis/build/michaeluno/sample-tdd-plugin
@@ -206,6 +211,28 @@ uninstallPlugins() {
     php "$WP_CLI" plugin uninstall hello
 }
 
+# Evacuates plugin project files.
+# This needs to be done before installing the Wordpress files.
+# When the test WodPress site needs to be placed under the project directory such as on Travis CI,
+# simply copying the entire project files into the sub-directory of iteself is not possible.
+# so evacuate the project files to a temporary location first and then after installing WordPress, copy them back to the WordPress plugin directory.
+evaculateProjectFiles() {
+    
+    # Make sure no old file exists.
+    if [ -d "$TEMP_PROJECT_DIR" ]; then
+        rm -rf "$TEMP_PROJECT_DIR"    
+    fi
+    
+    # The `ln` command gives "Protocol Error" on Windows hosts so use the cp command.
+    # The below cp command appends an asterisk to drop hidden items especially the .git directory but in that case, the destination directory needs to exist.
+    mkdir -p "$TEMP_PROJECT_DIR"
+    
+    # Drop hidden files from being copied
+    cp -r "$PROJECT_DIR/"* "$TEMP_PROJECT_DIR"
+    
+    
+}
+
 # Installs the project plugin
 installPlugin() {
     
@@ -225,8 +252,9 @@ installPlugin() {
     # The below cp command appends an asterisk to drop hidden items especially the .git directory but in that case, the destination directory needs to exist.
     mkdir -p "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
     # drop hidden files from being copied
-    cp -r "$PROJECT_DIR/"* "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
-    # rm -rf "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/.git" # Remove git system files.
+    # cp -r "$PROJECT_DIR/"* "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
+ 
+    cp -r "$TEMP_PROJECT_DIR" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
  
     # wp cli command
     cd $WP_TEST_DIR
@@ -335,6 +363,7 @@ EOM
 # Download necessary applications
 downloadWPCLI
 downloadCodeception
+evaculateProjectFiles
 
 # Install components
 installWordPress
