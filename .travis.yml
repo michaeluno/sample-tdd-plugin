@@ -3,11 +3,15 @@ language: php
 sudo: false
 
 php:
-- 5.3
+# v5.3 is disabled because Codeception v2.x does not support it. Using v1.8 has an issue with log directory permissions.
+# - 5.3
+
 - 5.4
 - 5.5
 - 5.6
-- hhvm
+
+# HHVM is disabled because wp-cli causes an error.
+# - hhvm
 
 env:
 - WP_VERSION=latest WP_MULTISITE=0 TEMP=/tmp
