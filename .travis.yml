@@ -26,7 +26,7 @@ before_script:
 script:
 # - bash test/run.sh -c test/settings.travis.cfg
 - if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
-  ]]; then bash test/run.sh -c test/settings.travis.cfg -l './_output/coverage.xml'; else bash test/run.sh -c test/settings.travis.cfg; fi
+  ]]; then bash test/run.sh -c test/settings.travis.cfg -l 'coverage.xml'; else bash test/run.sh -c test/settings.travis.cfg; fi
 
 after_script:
 - if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
