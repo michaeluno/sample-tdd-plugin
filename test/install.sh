@@ -82,6 +82,9 @@ downloadWPCLI() {
         exit 1
     fi
     
+    # Output the wp-cli information in case an error occurs.
+    php "$WP_CLI" --info    
+    
 }
 
 installWordPress() {
@@ -91,7 +94,7 @@ installWordPress() {
     if [ ! "$PROJECT_DIR" == "$WP_TEST_DIR" ]; then  
         rm -rf "$WP_TEST_DIR"
     fi
-
+    
     # We use wp-cli command
     php "$WP_CLI" core download --force --path="$WP_TEST_DIR"
   
@@ -262,11 +265,14 @@ downloadCodeception() {
         echo Could not download c3.php.
         exit 1
     fi    
+
+    # Output the version in case an error occurs.
+    php "$CODECEPT" --version    
     
 }
 
 installCodeception() {
-    
+        
     # Run the bootstrap to generate necessary files.
     php "$CODECEPT" bootstrap "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/"
     
