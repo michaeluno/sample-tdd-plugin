@@ -25,6 +25,13 @@ class SampleTDDPlugin_AdminPage_Test extends WP_UnitTestCase {
         
     }
     
+    public function testSetUpReturnValue() {
+        
+        $_oAdminPage = new SampleTDDPlugin_AdminPage;
+        $this->assertEquals( null, $_oAdminPage->setUp() );
+        
+    }        
+    
     public function testMethodReturnValues() {
         
         ob_start();
