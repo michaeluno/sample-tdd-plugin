@@ -255,7 +255,13 @@ installPlugin() {
 
 downloadCodeception() {
 
-    download "http://codeception.com/codecept.phar" "$CODECEPT"        
+    # Use v1.8.x because v2.x does not support PHP 5.3
+    
+    # latest
+    # download "http://codeception.com/codecept.phar" "$CODECEPT"        
+    
+    # v1.8.7
+    download "http://codeception.com/releases/1.8.7/codecept.phar" "$CODECEPT"        
     if [[ ! $(find "$CODECEPT" -type f -size +0c 2>/dev/null) ]]; then
         echo Could not download Codeception.
         exit 1
