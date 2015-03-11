@@ -9,7 +9,7 @@ source $(dirname $0)/include/info.sh
 
 # Parse arguments
 CONFIGURATION_FILE_PATH="settings.cfg"
-while getopts “ht:c:v” OPTION
+while getopts “ht:c:v:l” OPTION
 do
     case $OPTION in
         h)
