@@ -14,7 +14,7 @@ env:
 - WP_VERSION=latest WP_MULTISITE=0 TEMP=/tmp
 
 install:
-- test/install.sh -c test/settings.travis.cfg 
+- bash test/install.sh -c test/settings.travis.cfg 
 #- if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
 #  ]]; then bash test/install.sh -c test/settings.travis.cfg; else bash test/install.sh -c test/settings.travis.cfg; fi
   
