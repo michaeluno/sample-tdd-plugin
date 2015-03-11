@@ -66,8 +66,6 @@ cd "$WORKING_DIR"
 echo "Project Dir: $PROJECT_DIR"
 echo "Working Dir: $WORKING_DIR"
 echo "WP Test Dir: $WP_TEST_DIR"
-echo "Coverage Log Dir Relative Path: $COVERAGE_LOG_DIR_PATH"
-
 
 # Exit on errors, xtrace
 # set -x
@@ -274,13 +272,7 @@ installCodeception() {
     
     # Copy the bootstrap script of the unit tests.
     cp -r "$PROJECT_DIR/test/tests/unit/_bootstrap.php" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/unit/_bootstrap.php"
-    
-    # If the output directory is not specified, do not enable coverage.
-    # ENABLE_COVERAGE="false"
-    # if [[ -z "$COVERAGE_LOG_DIR_PATH" ]]; then
-        # ENABLE_COVERAGE="true"
-    # fi
-    
+        
     # Create a acceptance setting file.
     FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/acceptance.suite.yml"
     cat <<EOM >$FILE
@@ -297,13 +289,12 @@ coverage:
     enabled: false            
 EOM
    # Create a Codeception setting file
-   # enabled: ${ENABLE_COVERAGE}
    FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/codeception.yml"
    cat <<EOM >$FILE
 actor: ${TESTER_CLASS_PREFIX}Tester
 paths:
     tests: tests
-    log: tests/${COVERAGE_LOG_DIR_PATH}
+    log: tests/_output
     data: tests/_data
     helpers: tests/_support
 settings:
@@ -320,7 +311,7 @@ modules:
             populate: true
             cleanup: false
 coverage:
-    
+    enabled: true
     whitelist:
         include: 
             - '../include/*'

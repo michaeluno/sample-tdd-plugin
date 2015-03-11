@@ -79,13 +79,17 @@ php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR"
 
 # Run unit tests
 # @bug the --steps option makes the coverage not being generated
-php "$CODECEPT" run unit --coverage-xml --config="$CODECEPT_TEST_DIR"
+if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
+    php "$CODECEPT" run unit --config="$CODECEPT_TEST_DIR" --coverage-xml 
+else 
+    php "$CODECEPT" run unit --config="$CODECEPT_TEST_DIR"
+fi
 
 # Copy the coverage file to the specified path
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
 
     # Convert it to absolute path
-    GENERATED_COVERAGE_DIR_PATH="$(cd "$(dirname "$CODECEPT_TEST_DIR/tests/$COVERAGE_LOG_DIR_PATH")"; pwd)/$(basename "$CODECEPT_TEST_DIR/tests/$COVERAGE_LOG_DIR_PATH")"
+    GENERATED_COVERAGE_DIR_PATH="$(cd "$(dirname "$CODECEPT_TEST_DIR/tests/_output")"; pwd)/$(basename "$CODECEPT_TEST_DIR/tests/_output")"
     GENERATED_COVERAGE_XML_FILE_PATH="$GENERATED_COVERAGE_DIR_PATH/coverage.xml"
     if [ ! -f "$GENERATED_COVERAGE_XML_FILE_PATH" ]; then
         echo "The xml coverage file could not be found: $GENERATED_COVERAGE_XML_FILE_PATH"
