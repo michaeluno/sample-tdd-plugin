@@ -115,7 +115,7 @@ PHP
     setup_database_table    
 
     # Create/renew the database - if the environment variable WP_MULTISITE is set, install multi site network Wordpress.
-    if [[ ! -z "$WP_MULTISITE" ]]; then    
+    if [[ $WP_MULTISITE ]]; then    
         php "$WP_CLI" wp core multisite-install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
     else
         php "$WP_CLI" core install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
