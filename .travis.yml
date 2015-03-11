@@ -14,9 +14,9 @@ env:
 - WP_VERSION=latest WP_MULTISITE=0 TEMP=/tmp
 
 install:
-# - test/install.sh -c test/settings.travis.cfg 
-- if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
-  ]]; then bash test/install.sh -c test/settings.travis.cfg -l '_output'; else bash test/run.sh -c test/settings.travis.cfg; fi
+- test/install.sh -c test/settings.travis.cfg 
+#- if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
+#  ]]; then bash test/install.sh -c test/settings.travis.cfg; else bash test/install.sh -c test/settings.travis.cfg; fi
   
 before_script:
   # starting PHP server (PHP 5.4)
@@ -24,9 +24,9 @@ before_script:
   - sleep 3
   
 script:
-- bash test/run.sh -c test/settings.travis.cfg
-# - if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
-  # ]]; then bash test/run.sh -c test/settings.travis.cfg -l './_output'; else bash test/run.sh -c test/settings.travis.cfg; fi
+# - bash test/run.sh -c test/settings.travis.cfg
+- if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
+  ]]; then bash test/run.sh -c test/settings.travis.cfg -l './_output/coverage.xml'; else bash test/run.sh -c test/settings.travis.cfg; fi
 
 after_script:
 - if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'

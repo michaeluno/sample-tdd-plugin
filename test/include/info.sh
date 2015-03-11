@@ -15,6 +15,6 @@ usage: $0 options
 OPTIONS:
     -c      Configuration file path
     -v      Show version
-    -l      Coverage log file path. If not set, the log file will not be created.
+    -l      Coverage log file path. Available only for run.sh.
 EOF
 }

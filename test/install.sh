@@ -11,7 +11,7 @@ source $(dirname $0)/include/info.sh
 # Parse arguments
 CONFIGURATION_FILE_PATH="settings.cfg"
 
-while getopts “ht:c:l:v:” OPTION
+while getopts “ht:c:v:” OPTION
 do
     case $OPTION in
         h)
@@ -21,11 +21,7 @@ do
         v)
             printVersion
             exit 1
-            ;;                 
-        l)  
-            echo "Setting the log output directory path."
-            COVERAGE_LOG_DIR_PATH=$OPTARG
-            ;;            
+            ;;                      
         c)
             CONFIGURATION_FILE_PATH=$OPTARG
             ;;
@@ -43,18 +39,6 @@ if [ ! -f "$CONFIGURATION_FILE_PATH" ]; then
 fi
 source "$CONFIGURATION_FILE_PATH"
 echo "Using the configuration file: $CONFIGURATION_FILE_PATH"
-
-# Parse arguments again after including the configuration file
-COVERAGE_LOG_DIR_PATH=
-while getopts “l” OPTION
-do
-    case $OPTION in
-        l)  
-            COVERAGE_LOG_DIR_PATH=$OPTARG
-            ;;
-
-    esac
-done
 
 # Variables
 WORKING_DIR=$(pwd)
@@ -81,7 +65,9 @@ cd "$WORKING_DIR"
 
 echo "Project Dir: $PROJECT_DIR"
 echo "Working Dir: $WORKING_DIR"
-echo "WP TEst Dir: $WP_TEST_DIR"
+echo "WP Test Dir: $WP_TEST_DIR"
+echo "Coverage Log Dir Relative Path: $COVERAGE_LOG_DIR_PATH"
+
 
 # Exit on errors, xtrace
 # set -x
@@ -290,10 +276,10 @@ installCodeception() {
     cp -r "$PROJECT_DIR/test/tests/unit/_bootstrap.php" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/unit/_bootstrap.php"
     
     # If the output directory is not specified, do not enable coverage.
-    ENABLE_COVERAGE="false"
-    if [[ -z "$COVERAGE_LOG_DIR_PATH" ]]; then
-        ENABLE_COVERAGE="true"
-    fi
+    # ENABLE_COVERAGE="false"
+    # if [[ -z "$COVERAGE_LOG_DIR_PATH" ]]; then
+        # ENABLE_COVERAGE="true"
+    # fi
     
     # Create a acceptance setting file.
     FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/acceptance.suite.yml"
@@ -311,6 +297,7 @@ coverage:
     enabled: false            
 EOM
    # Create a Codeception setting file
+   # enabled: ${ENABLE_COVERAGE}
    FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/codeception.yml"
    cat <<EOM >$FILE
 actor: ${TESTER_CLASS_PREFIX}Tester
@@ -333,7 +320,7 @@ modules:
             populate: true
             cleanup: false
 coverage:
-    enabled: ${ENABLE_COVERAGE}
+    
     whitelist:
         include: 
             - '../include/*'

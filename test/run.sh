@@ -7,7 +7,6 @@ SCRIPT_VERSION="1.0.0"
 source $(dirname $0)/include/download.sh
 source $(dirname $0)/include/info.sh
 
-
 # Parse arguments
 CONFIGURATION_FILE_PATH="settings.cfg"
 while getopts “ht:c:v” OPTION
@@ -25,7 +24,7 @@ do
             CONFIGURATION_FILE_PATH=$OPTARG
             ;;
         l)  
-            COVERAGE_LOG_DIR_PATH=$OPTARG
+            COVERAGE_FILE_PATH=$OPTARG
             ;;
         ?)
             printUsage
@@ -44,12 +43,12 @@ source "$CONFIGURATION_FILE_PATH"
 echo "Using the configuration file: $CONFIGURATION_FILE_PATH"
 
 # Parse arguments again after including the configuration file
-COVERAGE_LOG_DIR_PATH=
+COVERAGE_FILE_PATH=
 while getopts “l” OPTION
 do
     case $OPTION in
         l)  
-            COVERAGE_LOG_DIR_PATH=$OPTARG
+            COVERAGE_FILE_PATH=$OPTARG
             ;;
 
     esac
@@ -66,6 +65,8 @@ CODECEPT_TEST_DIR="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test"
 
 echo "Project Slug: $PROJECT_SLUG"
 echo "Codeception Test Dir: $CODECEPT_TEST_DIR"
+
+set -x
 
 # Make sure Codeception is installed
 download http://codeception.com/codecept.phar "$CODECEPT"
@@ -88,6 +89,20 @@ php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR"
 
 # Run unit tests
 # @bug the --steps option makes the coverage not being generated
-php "$CODECEPT" run unit --colors --coverage-xml --config="$CODECEPT_TEST_DIR"
+php "$CODECEPT" run unit --coverage-xml --config="$CODECEPT_TEST_DIR"
+
+# Copy the coverage file to the specified path
+if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
+
+    # Convert it to absolute path
+    GENERATED_COVERAGE_DIR_PATH="$(cd "$(dirname "$CODECEPT_TEST_DIR/tests/$COVERAGE_LOG_DIR_PATH")"; pwd)/$(basename "$CODECEPT_TEST_DIR/tests/$COVERAGE_LOG_DIR_PATH")"
+    GENERATED_COVERAGE_XML_FILE_PATH="$GENERATED_COVERAGE_DIR_PATH/coverage.xml"
+    if [ ! -f "$GENERATED_COVERAGE_XML_FILE_PATH" ]; then
+        echo "The xml coverage file could not be found: $GENERATED_COVERAGE_XML_FILE_PATH"
+    else
+        echo "Copying the xml coverage file to the specified location."
+        cp -f "$GENERATED_COVERAGE_XML_FILE_PATH" "$COVERAGE_FILE_PATH"
+    fi    
+fi
 
 echo "Tests has completed!"
