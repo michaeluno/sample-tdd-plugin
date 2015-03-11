@@ -1,4 +1,4 @@
-# Admin Page Framework Demo - Test Suite
+Sample TDD Plugin - Test Suite
 
 In order to run the tests, configure the setting file (`settings.cfg`) and run the installer and the executor scripts.
 
