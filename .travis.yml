@@ -16,6 +16,11 @@ php:
 env:
 - WP_VERSION=latest WP_MULTISITE=0 TEMP=/tmp
 
+# matrix:
+    # include:
+        # - php: 5.4
+        # env: WP_VERSION=latest WP_MULTISITE=1
+
 install:
 - bash test/install.sh -c test/settings.travis.cfg 
 

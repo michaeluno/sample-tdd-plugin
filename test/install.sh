@@ -10,8 +10,7 @@ source $(dirname $0)/include/info.sh
 
 # Parse arguments
 CONFIGURATION_FILE_PATH="settings.cfg"
-
-while getopts “ht:c:v:” OPTION
+while getopts “ht:c:v:m:” OPTION
 do
     case $OPTION in
         h)
@@ -115,11 +114,12 @@ PHP
     # Renew the database table
     setup_database_table    
 
-    # Create/renew the database
-    if [[ -z "$WP_ADMIN_PASSWORD" ]]; then
-        WP_ADMIN_PASSWORD="\"\""
+    # Create/renew the database - if the environment variable WP_MULTISITE is set, install multi site network Wordpress.
+    if [[ ! -z "$WP_MULTISITE" ]]; then    
+        php "$WP_CLI" wp core multisite-install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
+    else
+        php "$WP_CLI" core install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
     fi    
-    php "$WP_CLI" core install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
     
 }
     setup_database_table(){
@@ -157,10 +157,8 @@ installTestSuite() {
     
     # Download WordPress unit test suite library
     local WP_TEST_SUITES_TEMP_DIR="$TEMP/wordpress-tests-lib"
-    mkdir -p "$WP_TEST_SUITES_TEMP_DIR"
-    cd "$WP_TEST_SUITES_TEMP_DIR"
-    svn co --quiet https://develop.svn.wordpress.org/trunk/tests/phpunit/includes/
-        
+    svn export --force --quiet "https://develop.svn.wordpress.org/trunk/tests/phpunit/includes/" "$WP_TEST_SUITES_TEMP_DIR/includes"
+    
     # Set up WordPress testing suite library
     cd "$WP_TEST_DIR"
     
