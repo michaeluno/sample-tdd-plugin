@@ -314,15 +314,13 @@ coverage:
     enabled: true
     whitelist:
         include: 
-            - '../include/*'
+            - ../include/*
         exlude:
-            - '../library/*'
-            - '../test/*'
-    blacklist:
-        exlude:
-            - '../library/*'
-            - '../test/*'
-            - '*/library/*'
+            - ../library/*
+            - ../test/*
+            - ../.git
+            - ../*.md
+            - ../.git*
     # url of file which includes c3 router.
     # c3_url: '$WP_URL/'    
 EOM
