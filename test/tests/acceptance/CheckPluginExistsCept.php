@@ -1,5 +1,5 @@
 <?php 
-$I = new SampleTDDPlugin_AcceptanceTester( $scenario );
+$I = new AcceptanceTester( $scenario );
 $I->wantTo( 'Check the existence of the demo plugin.' );
 $I->amOnPage( '/wp-login.php' );
 $I->fillField( 'Username', 'admin' );

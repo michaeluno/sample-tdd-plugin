@@ -292,7 +292,7 @@ installCodeception() {
     # Create a acceptance setting file.
     FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/acceptance.suite.yml"
     cat <<EOM >$FILE
-class_name: ${TESTER_CLASS_PREFIX}AcceptanceTester
+class_name: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser
