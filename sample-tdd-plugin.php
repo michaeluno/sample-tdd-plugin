@@ -1,7 +1,8 @@
 <?php
 /* 
  * Plugin Name: Sample TDD Plugin 
- * Version:     0.0.1
+ * Plugin Author: Michael Uno
+ * Version:     0.0.2
  */
 
 function getSampleTDDValue( $mValue ) {
@@ -30,10 +31,13 @@ class SampleTDDPlugin extends SampleTDDPlugin_Base {
     
 }
 
-include( dirname( __FILE__ ) . '/library/admin-page-framework/admin-page-framework.php' );
-include( dirname( __FILE__ ) . '/include/class/SampleTDDPlugin_AdminPage.php' );
-
 function _loadSampleTDDPlugin() {
+    if ( ! class_exists( 'AdminPageFramework' ) ) {
+        return;
+    }
+    include( dirname( __FILE__ ) . '/include/class/SampleTDDPlugin_AdminPage.php' );
+    include( dirname( __FILE__ ) . '/include/class/SampleTDDPlugin_NetworkAdminPage.php' );
     new SampleTDDPlugin_AdminPage;
+    new SampleTDDPlugin_NetworkAdminPage;
 }
 add_action( 'plugins_loaded', '_loadSampleTDDPlugin' );

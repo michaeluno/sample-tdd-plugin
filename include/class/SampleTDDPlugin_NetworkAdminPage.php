@@ -1,5 +1,5 @@
 <?php
-class SampleTDDPlugin_AdminPage extends AdminPageFramework {
+class SampleTDDPlugin_NetworkAdminPage extends AdminPageFramework_NetworkAdmin {
     
     /**
      * Sets up admin pages.
@@ -9,8 +9,8 @@ class SampleTDDPlugin_AdminPage extends AdminPageFramework {
         $this->setRootMenuPage( 'Sample TDD' );    // where to belong
         $this->addSubMenuItem(
             array(
-                'title'        => __( 'Sample TDD Plugin', 'sample-tdd-plugin' ),
-                'page_slug'    => 'sample_tdd_plugin'
+                'title'        => __( 'Sample TDD Plugin on Network', 'sample-tdd-plugin' ),
+                'page_slug'    => 'sample_tdd_plugin_network'
             )
         );
 
@@ -20,9 +20,9 @@ class SampleTDDPlugin_AdminPage extends AdminPageFramework {
      * Called in the middle of page rendering.
      * @callback        action      do_{page slug}
      */
-    public function do_sample_tdd_plugin() {  
+    public function do_sample_tdd_plugin_network() {  
         ?>
-        <h3>Sample TDD Plugin</h3>
+        <h3>Network Sample TDD Plugin</h3>
         <p>This is a sample TDD plugin which does nothing!</p>
         <?php   
     }

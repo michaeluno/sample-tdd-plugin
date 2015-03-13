@@ -226,7 +226,12 @@ evacuateProjectFiles() {
 }
 
 # Installs the project plugin
-installPlugin() {
+installPlugins() {
+    
+    ## Admin Page Framework
+    php "$WP_CLI" plugin install admin-page-framework --activate
+    
+    ## This Project Plugin
     
     # Make sure no old file exists.
     if [ -d "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG" ]; then
@@ -246,7 +251,6 @@ installPlugin() {
     # drop hidden files from being copied
     # cp -r "$PROJECT_DIR/"* "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
  
-    # cp -r "$TEMP_PROJECT_DIR" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG"
     cp -r "$TEMP_PROJECT_DIR" "$WP_TEST_DIR/wp-content/plugins"
  
     # wp cli command
@@ -365,7 +369,7 @@ evacuateProjectFiles
 installWordPress
 installTestSuite
 uninstallPlugins
-installPlugin
+installPlugins
 installCodeception
 
 echo Installation has been complete!
