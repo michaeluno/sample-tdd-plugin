@@ -75,7 +75,13 @@ fi
 # The --coverage option causes an error with acceptance and functional tests. So do them separately.
 # @see  https://github.com/Codeception/Codeception/issues/515
 # php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR"
-php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR"
+if [[ $WP_MULTISITE = 1 ]]; then    
+    echo "Acceptance-testing against muiti-site"
+    php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR" -g multisite
+else
+    echo "Acceptance-testing"
+    php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR" --skip-group multisite
+fi    
 
 # Run unit tests
 # @bug the --steps option makes the coverage not being generated

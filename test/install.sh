@@ -293,7 +293,7 @@ installCodeception() {
     # Copy the bootstrap script of the unit tests.
     cp -r "$PROJECT_DIR/test/tests/unit/_bootstrap.php" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/unit/_bootstrap.php"
         
-    # Create a acceptance setting file.
+    # Create an acceptance setting file.
     FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/acceptance.suite.yml"
     cat <<EOM >$FILE
 class_name: AcceptanceTester
@@ -352,10 +352,6 @@ EOM
     
     # Create sub-directories used by c3
     mkdir -p "$WP_TEST_DIR/report"
-    # mkdir -p "$WP_TEST_DIR/report/clover"
-    # mkdir -p "$WP_TEST_DIR/report/serialized"
-    # mkdir -p "$WP_TEST_DIR/report/html"
-    # mkdir -p "$WP_TEST_DIR/report/clean"
     mkdir -p "$WP_TEST_DIR/c3tmp"   
     
 }
