@@ -32,7 +32,8 @@ class SampleTDDPlugin extends SampleTDDPlugin_Base {
 }
 
 function _loadSampleTDDPlugin() {
-    if ( ! class_exists( 'AdminPageFramework' ) ) {
+    $_sFrameworkPath = dirname( dirname( __FILE__ ) ) . '/admin-page-framework/library/admin-page-framework/admin-page-framework.php';
+    if ( ! class_exists( 'AdminPageFramework' ) && ! @include( $_sFrameworkPath ) ) {
         return;
     }
     include( dirname( __FILE__ ) . '/include/class/SampleTDDPlugin_AdminPage.php' );
