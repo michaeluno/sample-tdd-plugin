@@ -19,14 +19,14 @@ env:
 matrix:
     include:
         - php: 5.4
-        env: WP_VERSION=latest WP_MULTISITE=1
+          env: WP_VERSION=latest WP_MULTISITE=1
 
 install:
-- bash test/install.sh -c test/settings.travis.cfg 
+    - bash test/install.sh -c test/settings.travis.cfg 
 
 before_script:
-  - php -S 127.0.0.1:4000 &
-  - sleep 3
+    - php -S 127.0.0.1:4000 &
+    - sleep 3
   
 script:
 - if [[ $TRAVIS_PHP_VERSION = '5.5' && $WP_VERSION = 'latest' && $WP_MULTISITE = '0'
