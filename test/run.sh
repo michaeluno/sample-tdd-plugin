@@ -74,16 +74,18 @@ fi
 if [[ $WP_MULTISITE = 1 ]]; then    
     echo "Testing against a multi-site."
     OPTION_SKIP_GROUP=
+    OPTION_GROUP="--group multisite"
 else
     echo "Testing against a normal site."
     OPTION_SKIP_GROUP="--skip-group multisite"
+    OPTION_GROUP=
 fi    
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
     OPTION_COVERAGE="--coverage-xml"
 else 
     OPTION_COVERAGE=
 fi
-php "$CODECEPT" run --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_SKIP_GROUP $OPTION_COVERAGE
+php "$CODECEPT" run --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP $OPTION_COVERAGE
 
 # Copy the coverage file to the specified path
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
