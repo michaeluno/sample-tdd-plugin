@@ -89,7 +89,8 @@ if(isset($GLOBALS['wp_tests_options'])) {
 	}
 }
 
-return;
+// warnings do not appear
+// return;
 
 // Load WordPress
 require_once ABSPATH . '/wp-settings.php';
