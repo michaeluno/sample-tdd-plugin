@@ -93,11 +93,11 @@ if(isset($GLOBALS['wp_tests_options'])) {
 // return;
 
 // Load WordPress
-// require_once ABSPATH . '/wp-settings.php';
-if ( ! defined( 'WPINC' ) ) {
-    require_once dirname( __FILE__ ) . '/wp-settings.php';
-}
-return;
+require_once ABSPATH . '/wp-settings.php';
+// if ( ! defined( 'WPINC' ) ) {
+    // require_once dirname( __FILE__ ) . '/wp-settings.php';
+// }
+// return;
 
 // Delete any default posts & related data
 _delete_all_posts();
