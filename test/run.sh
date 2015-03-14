@@ -74,7 +74,7 @@ fi
 if [[ $WP_MULTISITE = 1 ]]; then    
     echo "Testing against a multi-site."
     OPTION_SKIP_GROUP=
-    OPTION_GROUP="--group multisite"
+    OPTION_GROUP="--group multisite --group ms-files"
 else
     echo "Testing against a normal site."
     OPTION_SKIP_GROUP="--skip-group multisite"
