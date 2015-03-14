@@ -21,6 +21,8 @@ define( 'WPINC', 'wp-includes' );
 require( ABSPATH . WPINC . '/load.php' );
 require( ABSPATH . WPINC . '/default-constants.php' );
 
+return;
+
 /*
  * These can't be directly globalized in version.php. When updating,
  * we're including version.php from another install and don't want
