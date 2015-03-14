@@ -54,11 +54,6 @@ CODECEPT="$TEMP/codecept.phar"
 C3="$TEMP/c3.php"
 TEMP_PROJECT_DIR="$TEMP/$PROJECT_SLUG"
 
-# Use them like a command
-echo "Creating aliases."
-alias codecept="$CODECEPT"
-alias wp="$WP_CLI"
-
 # convert any relative path or Windows path to linux/unix path to be usable for some path related commands such as basename
 if [ ! -d "$WP_TEST_DIR" ]; then
   mkdir -p "$WP_TEST_DIR"
@@ -74,6 +69,11 @@ echo "WP Test Dir: $WP_TEST_DIR"
 # Exit on errors, xtrace
 # set -x
 set -ex
+
+# Use them like a command
+echo "Creating aliases."
+alias codecept="$CODECEPT"
+alias wp="$WP_CLI"
 
 # On Travis, the working directory looks like:
 # /home/travis/build/michaeluno/sample-tdd-plugin
