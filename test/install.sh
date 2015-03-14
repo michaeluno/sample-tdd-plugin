@@ -84,7 +84,7 @@ downloadWPCLI() {
     # Use it like a command.
     # alias wp="php \"$WP_CLI\""
     _wp="php \"$WP_CLI\""
-    alias wp="${_wp}"
+    alias "wp=\"${_wp}\""
        
     # Output the wp-cli information in case an error occurs.
     wp --info    
