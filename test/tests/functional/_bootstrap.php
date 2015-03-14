@@ -8,7 +8,7 @@ if ( ! $_sTestsDirPath ) {
 }        
 
 require_once $_sTestsDirPath . '/includes/functions.php';
-return;
+
 
 function _loadPluginManually() {
 	require $GLOBALS['_sProjectDirPath'] . '/sample-tdd-plugin.php';
@@ -16,5 +16,5 @@ function _loadPluginManually() {
 tests_add_filter( 'muplugins_loaded', '_loadPluginManually' );
 
 require $_sTestsDirPath . '/includes/bootstrap.php';
-
+return;
 activate_plugin( 'sample-tdd-plugin/sample-tdd-plugin.php' );
