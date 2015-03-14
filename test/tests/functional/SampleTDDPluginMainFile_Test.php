@@ -8,7 +8,7 @@ include_once( dirname( __FILE__ ) . '/_bootstrap.php' );
 /**
  * @group sample_test_plugin
  */
-class SampleTDDPlugin_Test extends \WP_UnitTestCase {
+class SampleTDDPluginMainFile_Test extends \WP_UnitTestCase {
     
     public function setUp() {
         parent::setUp();

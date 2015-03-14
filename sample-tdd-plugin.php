@@ -5,9 +5,7 @@
  * Version:     0.0.3
  */
 
-function getSampleTDDValue( $mValue ) {
-    return $mValue;
-}
+include( dirname( __FILE__ ) . '/include/function/functions.php' );
 
 /**
  * The base class of the main sample class.
