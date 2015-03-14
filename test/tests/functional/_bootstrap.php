@@ -7,14 +7,21 @@ if ( ! $_sTestsDirPath ) {
     $_sTestsDirPath = $_sTestSiteDirPath . '/wordpress-tests-lib';
 }        
 
-require_once $_sTestsDirPath . '/includes/functions.php';
+// Referenced from bootstrap.php
+$GLOBALS['_sTestsDirPath'] = $_sTestsDirPath;
+
+require_once $GLOBALS['_sTestsDirPath'] . '/includes/functions.php';
 
 
 function _loadPluginManually() {
 	require $GLOBALS['_sProjectDirPath'] . '/sample-tdd-plugin.php';
 }
 tests_add_filter( 'muplugins_loaded', '_loadPluginManually' );
-return;
-require $_sTestsDirPath . '/includes/bootstrap.php';
+
+// Causing some unknown warnings.
+// require $_sTestsDirPath . '/includes/bootstrap.php';
+
+// Temporarily fix
+require dirname( __FILE__ ) . '/bootstrap.php';
 
 activate_plugin( 'sample-tdd-plugin/sample-tdd-plugin.php' );
