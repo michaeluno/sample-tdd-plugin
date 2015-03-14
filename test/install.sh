@@ -326,9 +326,6 @@ EOM
 class_name: FunctionalTester
 modules:
     enabled: [Filesystem, FunctionalHelper, Asserts, UnitHelper]
-    settings:
-        bootstrap: _bootstrap.php
-        suite_class: \PHPUnit_Framework_TestSuite    
 EOM
     
    # Create a Codeception global setting file
