@@ -80,7 +80,6 @@ downloadWPCLI() {
         echo Could not download wp-cii.
         exit 1
     fi
-    
 
     # Output the wp-cli information in case an error occurs.
     php "$WP_CLI" --info    
@@ -230,7 +229,12 @@ evacuateProjectFiles() {
 installPlugins() {
     
     ## Admin Page Framework
-    php "$WP_CLI" plugin install admin-page-framework --activate
+    # php "$WP_CLI" plugin install admin-page-framework --activate
+    if [[ $WP_MULTISITE = 1 ]]; then    
+        php "$WP_CLI" plugin install admin-page-framework --activate-network
+    else
+        php "$WP_CLI" plugin install admin-page-framework --activate
+    fi         
     
     ## This Project Plugin
     
@@ -256,7 +260,13 @@ installPlugins() {
  
     # wp cli command
     cd $WP_TEST_DIR
-    php "$WP_CLI" plugin activate $PROJECT_SLUG
+    # php "$WP_CLI" plugin activate $PROJECT_SLUG
+    
+    if [[ $WP_MULTISITE = 1 ]]; then    
+        php "$WP_CLI" plugin activate --network $PROJECT_SLUG
+    else
+        php "$WP_CLI" plugin activate $PROJECT_SLUG
+    fi     
     
 }
 
