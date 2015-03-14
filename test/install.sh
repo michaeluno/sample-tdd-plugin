@@ -368,7 +368,7 @@ EOM
     # Make it load c3.php
     cp -r "$C3" "$WP_TEST_DIR/c3.php"
     cd "$WP_TEST_DIR"
-    sed -i "s:<?php:<?php require( dirname( __FILE__ ) . '/c3.php' );:" index.php   
+    # sed -i "s:<?php:<?php require( dirname( __FILE__ ) . '/c3.php' );:" index.php   
     
     # Create sub-directories used by c3
     mkdir -p "$WP_TEST_DIR/report"
