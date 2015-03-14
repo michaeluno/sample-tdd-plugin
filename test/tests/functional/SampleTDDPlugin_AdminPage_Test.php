@@ -1,4 +1,5 @@
 <?php
+return;
 /**
  * Manually include the bootstrap script as Codeception bootstrap runs after loading this file.
  * @see https://github.com/Codeception/Codeception/issues/862
