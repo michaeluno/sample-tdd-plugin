@@ -55,6 +55,7 @@ C3="$TEMP/c3.php"
 TEMP_PROJECT_DIR="$TEMP/$PROJECT_SLUG"
 
 # Use them like a command
+echo "Creating aliases."
 alias codecept="$CODECEPT"
 alias wp="$WP_CLI"
 
