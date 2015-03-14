@@ -7,7 +7,7 @@ if ( ! $_sTestsDirPath ) {
     $_sTestsDirPath = $_sTestSiteDirPath . '/wordpress-tests-lib';
 }        
 
-require_once $_sTestsDirath . '/includes/functions.php';
+require_once $_sTestsDirPath . '/includes/functions.php';
 return;
 
 function _loadPluginManually() {
