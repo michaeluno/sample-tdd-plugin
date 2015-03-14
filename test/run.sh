@@ -89,7 +89,7 @@ fi
 # php "$CODECEPT" run acceptance --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP
 # php "$CODECEPT" run functional --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP $OPTION_COVERAGE
 
-OPTION_GROUP="--group aaaa"
+OPTION_GROUP=""
 php "$CODECEPT" run functional --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP
 
 # Copy the coverage file to the specified path
