@@ -83,7 +83,8 @@ downloadWPCLI() {
     
     # Use it like a command.
     # alias wp="php \"$WP_CLI\""
-    alias wp=\"php \\"$WP_CLI\\"\"
+    _wp="php \"$WP_CLI\""
+    alias wp="${_wp}"
        
     # Output the wp-cli information in case an error occurs.
     wp --info    
@@ -276,7 +277,8 @@ downloadCodeception() {
         exit 1
     fi
     
-    alias codecept=\"php \\"$CODECEPT\\"\"
+    _codecept="php \"$CODECEPT\""
+    alias codecept="${_codecept}"    
     
     # Output the version in case an error occurs.
     codecept --version      
