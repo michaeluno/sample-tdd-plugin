@@ -70,11 +70,6 @@ echo "WP Test Dir: $WP_TEST_DIR"
 # set -x
 set -ex
 
-# Use them like a command
-echo "Creating aliases."
-alias codecept="$CODECEPT"
-alias wp="$WP_CLI"
-
 # On Travis, the working directory looks like:
 # /home/travis/build/michaeluno/sample-tdd-plugin
 
@@ -85,7 +80,10 @@ downloadWPCLI() {
         echo Could not download wp-cii.
         exit 1
     fi
-        
+    
+    # Use it like a command.
+    alias wp="$WP_CLI"
+    
     # Output the wp-cli information in case an error occurs.
     wp --info    
     
@@ -276,8 +274,11 @@ downloadCodeception() {
         echo Could not download Codeception.
         exit 1
     fi
+    
+    alias codecept="$CODECEPT"    
+    
     # Output the version in case an error occurs.
-    php "$CODECEPT" --version      
+    codecept --version      
     
     # c3 
     # @see  https://github.com/Codeception/c3
@@ -293,7 +294,7 @@ downloadCodeception() {
 installCodeception() {
         
     # Run the bootstrap to generate necessary files.
-    php "$CODECEPT" bootstrap "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/"
+    codecept bootstrap "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/"
     
     # Copy the bootstrap script of the functional tests.
     cp -r "$PROJECT_DIR/test/tests/functional/_bootstrap.php" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/functional/_bootstrap.php"
