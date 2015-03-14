@@ -1,4 +1,5 @@
 <?php
+class SampleTDDPlugin_Test extends \WP_UnitTestCase {}
 return;
 /**
  * Manually include the bootstrap script as Codeception bootstrap runs after loading this file.
