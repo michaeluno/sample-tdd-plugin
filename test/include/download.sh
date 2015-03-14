@@ -17,12 +17,11 @@ download() {
         if [[ ! $(find "$1" -type f -size +0c 2>/dev/null) ]]; then
             # Try with wget as the above function is default to curl
             echo Could not fill the file. Now trying with wget.
-            wget -nv -O "$2" "$1" --no-check-certificate
+            wget -nv -O "$2" "$1" --no-check-certificate 1> NUL 2> NUL
         fi 
         
     elif [ `which wget` ]; then
-        wget -nv -O "$2" "$1" --no-check-certificate
-    fi
-        
+        wget -nv -O "$2" "$1" --no-check-certificate 1> NUL 2> NUL
+    fi        
     
 }

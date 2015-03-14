@@ -228,13 +228,16 @@ evacuateProjectFiles() {
 # Installs the project plugin
 installPlugins() {
     
-    ## Admin Page Framework
-    # php "$WP_CLI" plugin install admin-page-framework --activate
+    # Install user specified plugins
     if [[ $WP_MULTISITE = 1 ]]; then    
-        php "$WP_CLI" plugin install admin-page-framework --activate-network
+        local OPTION_ACTIVATE="--activate-network"
     else
-        php "$WP_CLI" plugin install admin-page-framework --activate
+        local OPTION_ACTIVATE="--activate"
     fi         
+    for _INSTALL_PLUGIN in "${INSTALL_PLUGINS[@]}" 
+    do :
+        php "$WP_CLI" plugin install "$_INSTALL_PLUGIN" $OPTION_ACTIVATE
+    done    
     
     ## This Project Plugin
     

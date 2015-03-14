@@ -82,6 +82,7 @@ else
 fi    
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
     OPTION_COVERAGE="--coverage-xml"
+    OPTION_COVERAGE="--coverage-xml --coverage-html"
 else 
     OPTION_COVERAGE=
 fi
