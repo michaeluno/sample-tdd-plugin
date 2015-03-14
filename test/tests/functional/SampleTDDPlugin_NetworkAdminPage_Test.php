@@ -28,7 +28,9 @@ class SampleTDDPlugin_NetworkAdminPage_Test extends \WP_UnitTestCase {
     public function testSetUpReturnValue() {
         
         $_oAdminPage = new SampleTDDPlugin_NetworkAdminPage;
-        $this->assertEquals( null, $_oAdminPage->setUp() );
+        // $this->assertEquals( null, $_oAdminPage->setUp() );
+        
+        $this->assertEquals( false, isset( $_oAdminPage->oProp ) );
         
     }        
     
@@ -36,7 +38,7 @@ class SampleTDDPlugin_NetworkAdminPage_Test extends \WP_UnitTestCase {
         
         ob_start();
         $_oAdminPage = new SampleTDDPlugin_NetworkAdminPage;
-        $_oAdminPage->do_sample_tdd_plugin();
+        $_oAdminPage->do_sample_tdd_plugin_network();
         $_sOutput = ob_get_contents();
         $this->assertContains( 'Network Sample TDD Plugin', $_sOutput );
         ob_end_clean();        
