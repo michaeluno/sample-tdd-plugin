@@ -20,11 +20,7 @@ tests_add_filter( 'muplugins_loaded', '_loadPluginManually' );
 
 // Store the value of the $file variable as it will be changed by WordPress.
 $_file = $file;
-require $_sTestsDirPath . '/includes/bootstrap.php';
+require $GLOBALS['_sTestsDirPath'] . '/includes/bootstrap.php';
 $file = $_file;
 
-// Temporarily fix
-// require dirname( __FILE__ ) . '/bootstrap.php';
-
-return;
 activate_plugin( 'sample-tdd-plugin/sample-tdd-plugin.php' );
