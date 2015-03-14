@@ -24,4 +24,5 @@ tests_add_filter( 'muplugins_loaded', '_loadPluginManually' );
 // Temporarily fix
 require dirname( __FILE__ ) . '/bootstrap.php';
 
+return;
 activate_plugin( 'sample-tdd-plugin/sample-tdd-plugin.php' );
