@@ -1,9 +1,4 @@
 <?php
-
-// These clases are for unit test suites but we run them as functional tests.
-use Codeception\Module\Asserts;
-use Codeception\Module\UnitHelper;
-
 $_sTestsDirPath                 = getenv( 'WP_TESTS_DIR' );
 // $_sSystemTempDirPath         = getenv( 'TEMP' ) ? getenv( 'TEMP' ) : '/tmp';
 $GLOBALS['_sProjectDirPath']    = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
