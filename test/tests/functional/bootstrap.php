@@ -64,13 +64,16 @@ if ( $multisite ) {
 }
 unset( $multisite );
 
-return;
+// warnings gone here
+// return;
 
 require_once $_sTestsIncludesDirPath . '/functions.php';
 
 $GLOBALS['_wp_die_disabled'] = false;
 // Allow tests to override wp_die
 tests_add_filter( 'wp_die_handler', '_wp_die_handler_filter' );
+
+return;
 
 // Preset WordPress options defined in bootstrap file.
 // Used to activate themes, plugins, as well as  other settings.
