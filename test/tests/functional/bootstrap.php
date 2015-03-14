@@ -95,6 +95,7 @@ if(isset($GLOBALS['wp_tests_options'])) {
 // Load WordPress
 require_once ABSPATH . '/wp-settings.php';
 $GLOBALS['file'] = null;
+$GLOBALS['file'] = '';
 return;
 
 // Delete any default posts & related data
