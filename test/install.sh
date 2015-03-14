@@ -311,7 +311,7 @@ EOM
    # Create a Codeception setting file
    FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/codeception.yml"
    cat <<EOM >$FILE
-actor: ${TESTER_CLASS_PREFIX}Tester
+actor: Tester
 paths:
     tests: tests
     log: tests/_output
