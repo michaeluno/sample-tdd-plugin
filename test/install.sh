@@ -325,7 +325,7 @@ EOM
     cat <<EOM >$FILE
 class_name: FunctionalTester
 modules:
-    enabled: [Filesystem, FunctionalHelper, Asserts, UnitHelper, TestHelper]
+    enabled: [Filesystem, FunctionalHelper, Asserts, UnitHelper]
     settings:
         bootstrap: _bootstrap.php
         suite_class: \PHPUnit_Framework_TestSuite    
