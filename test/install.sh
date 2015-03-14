@@ -54,6 +54,10 @@ CODECEPT="$TEMP/codecept.phar"
 C3="$TEMP/c3.php"
 TEMP_PROJECT_DIR="$TEMP/$PROJECT_SLUG"
 
+# Use them like a command
+alias codecept="$CODECEPT"
+alias wp="$WP_CLI"
+
 # convert any relative path or Windows path to linux/unix path to be usable for some path related commands such as basename
 if [ ! -d "$WP_TEST_DIR" ]; then
   mkdir -p "$WP_TEST_DIR"
@@ -80,9 +84,9 @@ downloadWPCLI() {
         echo Could not download wp-cii.
         exit 1
     fi
-    
+        
     # Output the wp-cli information in case an error occurs.
-    php "$WP_CLI" --info    
+    wp --info    
     
 }
 
@@ -95,7 +99,7 @@ installWordPress() {
     fi
     
     # We use wp-cli command
-    php "$WP_CLI" core download --force --path="$WP_TEST_DIR"
+    wp core download --force --path="$WP_TEST_DIR"
   
     # Change directory to the test WordPres install directory.
     cd "$WP_TEST_DIR"    
@@ -106,7 +110,7 @@ installWordPress() {
         echo 'db pass is not empty'
         dbpass=--dbpass="${DB_PASS}"
     fi    
-    php "$WP_CLI" core config --dbname=$DB_NAME --dbuser="$DB_USER" $dbpass --extra-php <<PHP
+    wp core config --dbname=$DB_NAME --dbuser="$DB_USER" $dbpass --extra-php <<PHP
 define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_LOG', true );
 PHP
@@ -116,9 +120,9 @@ PHP
 
     # Create/renew the database - if the environment variable WP_MULTISITE is set, install multi site network Wordpress.
     if [[ $WP_MULTISITE = 1 ]]; then    
-        php "$WP_CLI" core multisite-install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
+        wp core multisite-install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
     else
-        php "$WP_CLI" core install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
+        wp core install --url="$WP_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER_NAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
     fi    
     
 }
@@ -136,12 +140,12 @@ PHP
         # RESULT=`mysql -u$DB_USER -p$DB_PASS --skip-column-names -e "SHOW DATABASES LIKE '$DB_NAME'"`
         RESULT=`mysql -u$DB_USER $dbpass --skip-column-names -e "SHOW DATABASES LIKE '$DB_NAME'"`
         if [ "$RESULT" == "$DB_NAME" ]; then
-            php "$WP_CLI" db drop --yes
+            wp db drop --yes
         fi
     
         # mysql -u $DB_USER -p$DB_PASS -e --f "DROP $DB_NAME"
         # mysqladmin -u$#DB_USER -p$DB_PASS drop -f $DB_NAME
-        php "$WP_CLI" db create
+        wp db create
         
     }
     
@@ -199,8 +203,8 @@ installTestSuite() {
 # Uninstalls default plugins    
 uninstallPlugins() {
     cd "$WP_TEST_DIR"
-    php "$WP_CLI" plugin uninstall akismet
-    php "$WP_CLI" plugin uninstall hello
+    wp plugin uninstall akismet
+    wp plugin uninstall hello
 }
 
 # Evacuates plugin project files.
@@ -229,7 +233,7 @@ evacuateProjectFiles() {
 installPlugins() {
     
     ## Admin Page Framework
-    php "$WP_CLI" plugin install admin-page-framework --activate
+    wp plugin install admin-page-framework --activate
     
     ## This Project Plugin
     
@@ -255,7 +259,7 @@ installPlugins() {
  
     # wp cli command
     cd $WP_TEST_DIR
-    php "$WP_CLI" plugin activate $PROJECT_SLUG
+    wp plugin activate $PROJECT_SLUG
     
 }
 

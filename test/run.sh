@@ -56,6 +56,10 @@ CODECEPT_TEST_DIR="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test"
 echo "Project Slug: $PROJECT_SLUG"
 echo "Codeception Test Dir: $CODECEPT_TEST_DIR"
 echo "Coverage File Path: $COVERAGE_FILE_PATH"
+
+# Use it like a command
+alias codecept="$CODECEPT"
+
 set -ex
 
 # Make sure Codeception is installed
@@ -85,7 +89,7 @@ if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
 else 
     OPTION_COVERAGE=
 fi
-php "$CODECEPT" run --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP $OPTION_COVERAGE
+codecept run --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP $OPTION_COVERAGE
 
 # Copy the coverage file to the specified path
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
