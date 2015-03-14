@@ -89,8 +89,8 @@ fi
 # php "$CODECEPT" run acceptance --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP
 # php "$CODECEPT" run functional --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP $OPTION_COVERAGE
 
-OPTION_GROUP=""
-php "$CODECEPT" run functional --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP
+
+php "$CODECEPT" run functional --config="$CODECEPT_TEST_DIR"
 
 # Copy the coverage file to the specified path
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
@@ -107,4 +107,4 @@ if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
     fi    
 fi
 
-echo "Tests has completed!"
+echo "Tests have completed!"
