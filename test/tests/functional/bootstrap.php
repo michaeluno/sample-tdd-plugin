@@ -64,7 +64,7 @@ if ( $multisite ) {
 }
 unset( $multisite );
 
-// warnings gone here
+// warnings do not appear
 // return;
 
 require_once $_sTestsIncludesDirPath . '/functions.php';
@@ -73,7 +73,8 @@ $GLOBALS['_wp_die_disabled'] = false;
 // Allow tests to override wp_die
 tests_add_filter( 'wp_die_handler', '_wp_die_handler_filter' );
 
-return;
+// warnings do not appear
+// return;
 
 // Preset WordPress options defined in bootstrap file.
 // Used to activate themes, plugins, as well as  other settings.
@@ -87,6 +88,8 @@ if(isset($GLOBALS['wp_tests_options'])) {
 		tests_add_filter( 'pre_option_'.$key, 'wp_tests_options' );
 	}
 }
+
+return;
 
 // Load WordPress
 require_once ABSPATH . '/wp-settings.php';
