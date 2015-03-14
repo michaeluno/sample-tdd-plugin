@@ -1,11 +1,13 @@
 <?php
-class SampleTDDPlugin_Test {}
-return;
 /**
  * Manually include the bootstrap script as Codeception bootstrap runs after loading this file.
  * @see https://github.com/Codeception/Codeception/issues/862
  */
 include_once( dirname( __FILE__ ) . '/_bootstrap.php' );
+
+class SampleTDDPlugin_Test {}
+return;
+
 /**
  * @group sample_test_plugin
  */
