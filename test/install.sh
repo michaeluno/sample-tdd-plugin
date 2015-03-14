@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Enable interactive shell to support the alias command.
+shopt -s expand_aliases
+source ~/.bash_aliases
+
 # Script information
 SCRIPT_NAME="WordPress Plugin The Test Suite Installer"
 SCRIPT_VERSION="1.0.0"
@@ -82,9 +86,9 @@ downloadWPCLI() {
     fi
     
     # Use it like a command.
-    # alias wp="php \"$WP_CLI\""
-    _wp="php \"$WP_CLI\""
-    alias wp=${_wp}
+    alias wp="php $WP_CLI"
+    # _wp="php \"$WP_CLI\""
+    # alias wp=${_wp}
        
     # Output the wp-cli information in case an error occurs.
     wp --info    
@@ -277,8 +281,8 @@ downloadCodeception() {
         exit 1
     fi
     
-    _codecept="php \"$CODECEPT\""
-    alias codecept="${_codecept}"    
+    # _codecept="php \"$CODECEPT\""
+    alias codecept="php $CODECEPT"
     
     # Output the version in case an error occurs.
     codecept --version      

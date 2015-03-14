@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Enable interactive shell to support the alias command.
+shopt -s expand_aliases
+source ~/.bash_aliases
+
 SCRIPT_NAME="WordPress Plugin The Test Suite Script Executor"
 SCRIPT_VERSION="1.0.0"
 WORKING_DIR=$(pwd)
@@ -57,13 +61,13 @@ echo "Project Slug: $PROJECT_SLUG"
 echo "Codeception Test Dir: $CODECEPT_TEST_DIR"
 echo "Coverage File Path: $COVERAGE_FILE_PATH"
 
-# Use it like a command
-# alias codecept=\"php \\"$CODECEPT\\"\"
-_codecept="php \"$CODECEPT\""
-alias codecept="${_codecept}"    
-    
 set -ex
 
+# Use it like a command
+# alias codecept=\"php \\"$CODECEPT\\"\"
+# _codecept="php \"$CODECEPT\""
+alias codecept="php $CODECEPT"
+    
 # Make sure Codeception is installed
 download http://codeception.com/codecept.phar "$CODECEPT"
 
