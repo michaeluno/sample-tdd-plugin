@@ -365,7 +365,7 @@ if ( is_multisite() ) {
         // 
 		// die();
 	}
-	unset($file);
+	// unset($file);
 }
 
 // @remark      Warnings occur.
