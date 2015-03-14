@@ -21,7 +21,8 @@ define( 'WPINC', 'wp-includes' );
 require( ABSPATH . WPINC . '/load.php' );
 require( ABSPATH . WPINC . '/default-constants.php' );
 
-
+// @note    Warnings did not appear.
+// return;
 
 /*
  * These can't be directly globalized in version.php. When updating,
@@ -354,7 +355,8 @@ $GLOBALS['wp']->init();
  */
 do_action( 'init' );
 
-return;
+// @remark      warnings do not appear
+// return;
 
 // Check site status
 if ( is_multisite() ) {
@@ -364,6 +366,8 @@ if ( is_multisite() ) {
 	}
 	unset($file);
 }
+
+return;
 
 /**
  * This hook is fired once WP, all plugins, and the theme are fully loaded and instantiated.
