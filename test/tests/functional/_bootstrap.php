@@ -14,7 +14,7 @@ function _loadPluginManually() {
 	require $GLOBALS['_sProjectDirPath'] . '/sample-tdd-plugin.php';
 }
 tests_add_filter( 'muplugins_loaded', '_loadPluginManually' );
-
-require $_sTestsDirPath . '/includes/bootstrap.php';
 return;
+require $_sTestsDirPath . '/includes/bootstrap.php';
+
 activate_plugin( 'sample-tdd-plugin/sample-tdd-plugin.php' );
