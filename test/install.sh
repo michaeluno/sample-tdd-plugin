@@ -290,8 +290,8 @@ installCodeception() {
     # Run the bootstrap to generate necessary files.
     php "$CODECEPT" bootstrap "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/"
     
-    # Copy the bootstrap script of the unit tests.
-    cp -r "$PROJECT_DIR/test/tests/unit/_bootstrap.php" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/unit/_bootstrap.php"
+    # Copy the bootstrap script of the functional tests.
+    cp -r "$PROJECT_DIR/test/tests/functional/_bootstrap.php" "$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/functional/_bootstrap.php"
         
     # Create an acceptance setting file.
     FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/acceptance.suite.yml"
