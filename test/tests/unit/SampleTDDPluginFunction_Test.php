@@ -13,21 +13,20 @@ class SampleTDDPluginFunction_Test extends \Codeception\TestCase\Test
 
     protected function _before() {
         
+        if ( function_exists( 'getSampleTDDValue' ) ) {
+            return;
+        }
         $GLOBALS['_sProjectDirPath'] = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
-        include_once( $GLOBALS['_sProjectDirPath'] . '/include/function/functions.php' );        
+        include_once( $GLOBALS['_sProjectDirPath'] . '/include/function/functions.php' );
         
     }
 
-    protected function _after()
-    {
+    protected function _after() {
     }
 
     // tests
     public function testFunctions() {
-
         $this->assertEquals( __METHOD__, getSampleTDDValue( __METHOD__ ) );
-        
     }
-    
  
 }
