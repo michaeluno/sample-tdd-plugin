@@ -11,7 +11,7 @@ return;
 /**
  * @group sample_test_plugin
  */
-class SampleTDDPlugin_Test extends \WP_UnitTestCase {
+/* class SampleTDDPlugin_Test extends \WP_UnitTestCase {
     
     public function setUp() {
         parent::setUp();
@@ -45,4 +45,4 @@ class SampleTDDPlugin_Test extends \WP_UnitTestCase {
         
     }
     
-}    
+}     */
