@@ -70,26 +70,20 @@ fi
 # Run tests
 # @usage    php codecept run -c /path/to/my/project
 # @see      http://codeception.com/install
-
-# Run acceptance tests 
-# The --coverage option causes an error with acceptance and functional tests. So do them separately.
-# @see  https://github.com/Codeception/Codeception/issues/515
-# php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR"
+# @bug      the --steps option makes the coverage not being generated
 if [[ $WP_MULTISITE = 1 ]]; then    
-    echo "Acceptance-testing against muiti-site"
-    php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR" -g multisite
+    echo "Testing against a multi-site."
+    OPTION_SKIP_GROUP=
 else
-    echo "Acceptance-testing"
-    php "$CODECEPT" run acceptance --steps --colors --config="$CODECEPT_TEST_DIR" --skip-group multisite
+    echo "Testing against a normal site."
+    OPTION_SKIP_GROUP="--skip-group multisite"
 fi    
-
-# Run unit tests
-# @bug the --steps option makes the coverage not being generated
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
-    php "$CODECEPT" run unit --config="$CODECEPT_TEST_DIR" --coverage-xml 
+    OPTION_COVERAGE="--coverage-xml"
 else 
-    php "$CODECEPT" run unit --config="$CODECEPT_TEST_DIR"
+    OPTION_COVERAGE=
 fi
+php "$CODECEPT" run --report --colors --config="$CODECEPT_TEST_DIR" $OPTION_SKIP_GROUP $OPTION_COVERAGE
 
 # Copy the coverage file to the specified path
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
