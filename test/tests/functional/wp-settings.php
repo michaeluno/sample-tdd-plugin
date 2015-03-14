@@ -21,7 +21,7 @@ define( 'WPINC', 'wp-includes' );
 require( ABSPATH . WPINC . '/load.php' );
 require( ABSPATH . WPINC . '/default-constants.php' );
 
-return;
+
 
 /*
  * These can't be directly globalized in version.php. When updating,
@@ -353,6 +353,8 @@ $GLOBALS['wp']->init();
  * @since 1.5.0
  */
 do_action( 'init' );
+
+return;
 
 // Check site status
 if ( is_multisite() ) {
