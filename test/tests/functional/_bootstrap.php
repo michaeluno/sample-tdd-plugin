@@ -6,8 +6,8 @@ $_sTestSiteDirPath              = dirname( dirname( dirname( $GLOBALS['_sProject
 if ( ! $_sTestsDirPath ) {
     $_sTestsDirPath = $_sTestSiteDirPath . '/wordpress-tests-lib';
 }        
-
-require_once $_sTestsDirPath . '/includes/functions.php';
+return;
+require_once $_sTestsDirath . '/includes/functions.php';
 
 function _loadPluginManually() {
 	require $GLOBALS['_sProjectDirPath'] . '/sample-tdd-plugin.php';
