@@ -308,7 +308,16 @@ coverage:
     # acceptance tests fail if this value is true
     enabled: false            
 EOM
-   # Create a Codeception setting file
+
+    # Create a functional setting file. Add modules for unit tests.
+    FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/tests/functional.suite.yml"
+    cat <<EOM >$FILE
+class_name: FunctionalTester
+modules:
+    enabled: [Filesystem, FunctionalHelper, Asserts, UnitHelper]
+EOM
+    
+   # Create a Codeception global setting file
    FILE="$WP_TEST_DIR/wp-content/plugins/$PROJECT_SLUG/test/codeception.yml"
    cat <<EOM >$FILE
 actor: Tester
