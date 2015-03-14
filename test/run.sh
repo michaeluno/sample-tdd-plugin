@@ -58,7 +58,7 @@ echo "Codeception Test Dir: $CODECEPT_TEST_DIR"
 echo "Coverage File Path: $COVERAGE_FILE_PATH"
 
 # Use it like a command
-alias codecept="php $CODECEPT"
+alias codecept=php $CODECEPT
 
 set -ex
 
