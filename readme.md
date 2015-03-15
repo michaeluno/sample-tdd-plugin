@@ -19,5 +19,5 @@ This repository demonstrates how to perform
 
 ## Known Limitation
 
-- Code coverage is only covers functional tests.
+- Code coverage only covers functional tests.
 - Code coverage does not cover tests against a multi-site.
