@@ -8,41 +8,16 @@ Sample TDD Plugin is an open source WordPress plugin that does nothing. This is 
 [![Code Coverage](https://scrutinizer-ci.com/g/michaeluno/sample-tdd-plugin/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/michaeluno/sample-tdd-plugin/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/michaeluno/sample-tdd-plugin/badges/build.png?b=master)](https://scrutinizer-ci.com/g/michaeluno/sample-tdd-plugin/build-status/master)
 
-This plugin demonstrates how to perform 
+This repository demonstrates how to perform 
 
 - unit tests
 - functional tests
 - acceptance tests
-- generate code code coverage
+- generate code coverage
 - automated tests with CI
-- automated code review with CI
+- automated code reviews with CI
 
-## Screenshots 
+## Known Limitation
 
-Not available.
-
-## Download ##
-
-No need to download anything.
-
-## Installation ##
-
-No need to install anything.
-
-## How to Use ##
-
-This plugin is not usable.
- 
-## Bugs ##
-If you find an issue, let us know [here](https://github.com/michaeluno/sample-tdd-plugin/issues)!
-
-## Support ##
-No support available.
-
-## Contributions ##
-
-No need to contribute.
-
-## Supporting Future Development ##
-
-No need to support anything.
+- Code coverage is only covers functional tests.
+- Code coverage does not cover tests against a multi-site.
